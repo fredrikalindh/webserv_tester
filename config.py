@@ -1,5 +1,6 @@
 SERVER_ADDR = "127.0.0.1"
 SERVER_PORT = 8080
+SERVER_PORT2 = 8081
 SERVER_NAME = "default_server"
 SERVER_NAME2 = "localhost"
 SERVER_NAME3 = "google.com"

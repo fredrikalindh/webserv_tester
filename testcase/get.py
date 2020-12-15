@@ -8,7 +8,7 @@ import config
 
 
 def test_get_dir_no_index() -> str:
-    request_header = "GET /auto HTTP/1.1\r\nHost: default_server\r\n\r\n"
+    request_header = "GET /auto HTTP/1.1\r\nHost: {}\r\n\r\n".format(config.SERVER_NAME)
     http_response = send_request(request_header)
     if http_response.status != 404:
         return "Bad status code: {}, expected: {}".format(
@@ -18,7 +18,7 @@ def test_get_dir_no_index() -> str:
 
 
 def test_get_dir_autoindex() -> str:
-    request_header = "GET /auto HTTP/1.1\r\nHost: google.com\r\n\r\n"
+    request_header = "GET /auto HTTP/1.1\r\nHost: {}\r\n\r\n".format(config.SERVER_NAME3)
     http_response = send_request(request_header)
     if http_response.status != 200:
         return "Bad status code: {}, expected: {}".format(
@@ -32,7 +32,7 @@ def test_get_dir_autoindex() -> str:
 
 
 def test_get_dir_index() -> str:
-    request_header = "GET / HTTP/1.1\r\nHost: google.com\r\n\r\n"
+    request_header = "GET / HTTP/1.1\r\nHost: {}\r\n\r\n".format(config.SERVER_NAME3)
     http_response = send_request(request_header)
     if http_response.status != 200:
         return "Bad status code: {}, expected: {}".format(
@@ -44,23 +44,9 @@ def test_get_dir_index() -> str:
     return ""
 
 
-# def test_choosing_server() -> str:
-#     request_header = "GET /get HTTP/1.1\r\nHost: {}\r\n\r\n".format(config.SERVER_NAME2)
-#     http_response = send_request(request_header)
-#     if http_response.status != 200:
-#         return "Bad status code: {}, expected: {}".format(
-#             str(http_response.status), "400"
-#         )
-#     if http_response.body != "INDEX 1":
-#         return "Bad response body: {}, expected: {}".format(
-#             str(http_response.body), "INDEX 1"
-#         )
-#     return ""
-
-
 def test_content_neg_lang() -> str:
     request_header = (
-        "GET /auto/file HTTP/1.1\r\nHost: google.com\r\nAccept-Language: fr\r\n\r\n"
+        "GET /auto/file HTTP/1.1\r\nHost: {}\r\nAccept-Language: fr\r\n\r\n".format(config.SERVER_NAME3)
     )
     http_response = send_request(request_header)
     if http_response.status != 200:
@@ -77,7 +63,7 @@ def test_content_neg_lang() -> str:
 
 
 def test_content_neg_lang_double() -> str:
-    request_header = "GET /auto/file HTTP/1.1\r\nHost: google.com\r\nAccept-Language: en-US, fr\r\n\r\n"
+    request_header = "GET /auto/file HTTP/1.1\r\nHost: {}\r\nAccept-Language: en-US, fr\r\n\r\n".format(config.SERVER_NAME3)
     http_response = send_request(request_header)
     if http_response.status != 200:
         return "Bad status code: {}, expected: {}".format(
@@ -93,7 +79,7 @@ def test_content_neg_lang_double() -> str:
 
 def test_content_neg_charset() -> str:
     request_header = (
-        "GET /auto/file HTTP/1.1\r\nHost: google.com\r\nAccept-Charset: \r\n\r\n"
+        "GET /auto/file HTTP/1.1\r\nHost: {}\r\nAccept-Charset: \r\n\r\n".format(config.SERVER_NAME3)
     )
     http_response = send_request(request_header)
     if http_response.status != 200:
@@ -108,7 +94,7 @@ def test_content_neg_charset() -> str:
 
 def test_content_neg_charset_utf8() -> str:
     request_header = (
-        "GET /auto/file HTTP/1.1\r\nHost: google.com\r\nAccept-Charset: utf-8 \r\n\r\n"
+        "GET /auto/file HTTP/1.1\r\nHost: {}\r\nAccept-Charset: utf-8 \r\n\r\n".format(config.SERVER_NAME3)
     )
     http_response = send_request(request_header)
     if http_response.status != 200:

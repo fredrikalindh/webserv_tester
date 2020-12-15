@@ -103,7 +103,7 @@ def test_multiple_ports() -> str:
     req = requests.get(get_base_url())
     if req.text != "hello world":
         return "Bad content on first port."
-    req = requests.get("http://localhost:8081/")
+    req = requests.get("http://localhost:{}/".format(config.SERVER_PORT2))
     if req.text != "second file":
         return "Bad content on second port."
     return ""

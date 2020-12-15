@@ -97,7 +97,7 @@ def test_space_before_colon() -> str:
 def test_header_too_long() -> str:
     long_text = "T" * 100000
     request_header = (
-        "GET / HTTP/1.1\r\nHost: localhost\r\nUser-Agent: {}\r\n\r\n".format(long_text)
+        "GET / HTTP/1.1\r\nHost: {}\r\nUser-Agent: {}\r\n\r\n".format(config.SERVER_NAME2,long_text)
     )
     http_response = send_request(request_header)
     # print(http_response.status)
